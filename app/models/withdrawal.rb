@@ -3,8 +3,7 @@ class Withdrawal
 
   attr_accessor :amount, :banknotes
 
-  validates :amount, presence: true
-  validates :amount, numericality: { greater_than: 0 }
+  validates :amount, numericality: { greater_than: 0, allow_nil: true }
   validate :notes_availability, unless: proc { |withdrawal| (withdrawal.amount.to_i % 10).zero? }
 
   AVAILABLE_NOTES = [100, 50, 20, 10].freeze
@@ -17,6 +16,7 @@ class Withdrawal
       current_amount = current_amount % note
       banknotes[note] = count
     end
+    self.banknotes = banknotes.delete_if{ |_, count| count.zero? }
   end
 
   private
