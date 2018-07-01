@@ -1,4 +1,4 @@
-## API:
+## Cash Machine API:
 
 
  - url and method: GET https://cash-machine-api.herokuapp.com/withdrawal
