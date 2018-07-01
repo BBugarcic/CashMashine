@@ -7,7 +7,7 @@
 
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
-    origins '*'
+    origins Rails.env.production? ? 'https://cash-machine-react-frontend.herokuapp.com/withdrawal' : '*'
 
     resource '*',
       headers: :any, 
