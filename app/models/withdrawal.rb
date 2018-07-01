@@ -3,7 +3,7 @@ class Withdrawal
 
   attr_accessor :amount, :banknotes
 
-  validates :amount, numericality: { greater_than: 0, allow_nil: true }
+  validates :amount, numericality: { greater_than_or_equal_to: 0, allow_nil: true }
   validate :notes_availability, unless: proc { |withdrawal| (withdrawal.amount.to_i % 10).zero? }
 
   AVAILABLE_NOTES = [100, 50, 20, 10].freeze
@@ -23,7 +23,7 @@ class Withdrawal
 
   def notes_availability
     errors.add(
-      :amount, 'can not be issued with available bankontes($100, $50, $20, $10).'
+      :amount, 'must be issued in multiples of $10.'
     )
   end
 end

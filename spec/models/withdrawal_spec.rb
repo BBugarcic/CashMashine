@@ -4,7 +4,7 @@ RSpec.describe Withdrawal, type: :model do
   let(:withdrawal) { Withdrawal.new(amount: 280) }
 
   context 'validations' do
-    it { should validate_numericality_of(:amount).is_greater_than(0).allow_nil }
+    it { should validate_numericality_of(:amount).is_greater_than_or_equal_to(0).allow_nil }
 
     context 'unavailable notes' do
       before { withdrawal.amount = 283 }
